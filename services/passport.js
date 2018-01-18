@@ -22,7 +22,9 @@ passport.use(new GoogleStrategy(
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // Url for the user to be redirected after auth permission is granted
     // https://stackoverflow.com/a/33013835/7453363 -.-
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/auth/google/callback',
+    // relative path in this callback will cause google redirect url to fallback to http instead of using https, proxy: true resolves this
+    proxy: true
   },
   (accessToken, refreshToken, profile, done) => {
     User.findOne({ googleID: profile.id }).then((existingUser) => {
