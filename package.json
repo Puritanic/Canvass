@@ -1,5 +1,5 @@
 {
-  "name": "canvass",
+  "name": "canvass-server",
   "version": "1.0.0",
   "description": "Tool for providing feedback",
   "main": "index.js",
@@ -8,9 +8,11 @@
     "npm": "5.0.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "watch:client": "npm run start --prefix client",
+    "watch:server": "nodemon index.js",
+    "watch:dev":
+      " concurrently \"npm run watch:server\" \"npm run watch:client\" "
   },
   "author": "Puritanic",
   "license": "ISC",
@@ -23,6 +25,7 @@
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
+    "concurrently": "^3.5.1",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",

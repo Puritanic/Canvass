@@ -26,18 +26,17 @@ passport.use(new GoogleStrategy(
     // relative path in this callback will cause google redirect url to fallback to http instead of using https, proxy: true resolves this
     proxy: true
   },
-  (accessToken, refreshToken, profile, done) => {
-    User.findOne({ googleID: profile.id }).then((existingUser) => {
-      if (existingUser) {
-        // We already have the user in the DB, continue with the Auth flow by calling done()
-        // we need to provide two args: err obj and user record
-        done(null, existingUser);
-      }
-      // We don't have user, create a new entry in the DB
-      // then call done with the info about newly created user
-      new User({ googleID: profile.id })
-        .save()
-        .then(user => done(null, user));
-    });
+  async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({ googleID: profile.id });
+
+    if (existingUser) {
+      // We already have the user in the DB, continue with the Auth flow by calling done()
+      // we need to provide two args: err obj and user record
+      return done(null, existingUser);
+    }
+    // We don't have user, create a new entry in the DB
+    // then call done with the info about newly created user
+    const user = await new User({ googleID: profile.id }).save();
+    done(null, user);
   }
 ));
