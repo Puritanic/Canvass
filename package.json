@@ -11,8 +11,7 @@
     "start": "node index.js",
     "watch:client": "npm run start --prefix client",
     "watch:server": "nodemon index.js",
-    "watch:dev":
-      " concurrently \"npm run watch:server\" \"npm run watch:client\" "
+    "watch:dev": " concurrently \"npm run watch:server\" \"npm run watch:client\" "
   },
   "author": "Puritanic",
   "license": "ISC",

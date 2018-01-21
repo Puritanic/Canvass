@@ -8,6 +8,7 @@ require('./services/passport');
 
 const app = express();
 
+mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_CONNECT, {
   useMongoClient: true
 });
