@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./models/User');
 require('./services/passport');
@@ -12,6 +13,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_CONNECT, {
   useMongoClient: true
 });
+
+app.use(bodyParser.json());
 
 app.use(cookieSession({
   // determines how long cookie can stay in the browser before it's automatically expired
@@ -29,6 +32,7 @@ app.use(passport.session());
 /** *******  Routes  ********* */
 
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 app.get('/', (req, res) => {
   res.send('Hello!');
