@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import 'materialize-css/dist/css/materialize.min.css';
-
 import reducers from './reducers';
-
 import App from './components/App';
+
+console.log(process.env);
+
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
