@@ -42,6 +42,7 @@ if (process.env.NODE_ENV === 'production') {
   /* eslint-disable */
   const path = require('path');
   /* eslint-enable */
+  // Star route that handles all unrecognized routes
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
