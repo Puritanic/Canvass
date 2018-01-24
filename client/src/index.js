@@ -7,6 +7,13 @@ import 'materialize-css/dist/css/materialize.min.css';
 import reducers from './reducers';
 import App from './components/App';
 
+/* eslint-disable import/first */
+// just for testing post routes
+import axios from 'axios';
+
+window.axios = axios;
+/* eslint-enable import/first */
+
 console.log(process.env);
 
 /* eslint-disable no-underscore-dangle */
