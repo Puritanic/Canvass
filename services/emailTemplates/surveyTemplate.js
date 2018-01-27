@@ -214,10 +214,14 @@ module.exports = survey => `
                             <p>Please answer the following question:</p>
                             <p>${survey.body}</p>
                             <div>
-                              <a href="http://localhost:3000?opinion=yes">Yes</a>
+                              <a href="${
+  process.env.REDIRECT_DOMAIN
+}/api/surveys/thanks">Yes</a>
                             </div>
                             <div>
-                              <a href="http://localhost:3000?opinion=no">No</a>
+                              <a href="${
+  process.env.REDIRECT_DOMAIN
+}/api/surveys/thanks ">No</a>
                             </div>
                           </td>
                         </tr>

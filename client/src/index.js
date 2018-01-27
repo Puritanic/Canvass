@@ -14,8 +14,6 @@ import axios from 'axios';
 window.axios = axios;
 /* eslint-enable import/first */
 
-console.log(process.env);
-
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
