@@ -1,20 +1,21 @@
 import axios from 'axios';
-import * as types from './types';
-
-/* eslint-disable no-underscore-dangle */
-
-const startFetchUser = response => ({
-  type: types.FETCH_USER,
-  payload: response
-});
+import { FETCH_USER } from './types';
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/current_user');
-  dispatch(startFetchUser(res.data));
+
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const handleToken = token => async (dispatch) => {
   const res = await axios.post('/api/payment', token);
 
-  dispatch({ type: types.FETCH_USER, payload: res.data });
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const submitSurvey = (values, history) => async (dispatch) => {
+  const res = await axios.post('/api/surveys', values);
+
+  history.push('/surveys');
+  dispatch({ type: FETCH_USER, payload: res.data });
 };

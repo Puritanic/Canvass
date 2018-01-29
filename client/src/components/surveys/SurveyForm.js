@@ -3,31 +3,13 @@ import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
 import validateEmail from '../../helpers/validateEmail';
-
-const FIELDS = [
-  {
-    label: 'Survey Title',
-    name: 'title'
-  },
-  {
-    label: 'Subject Line',
-    name: 'subject'
-  },
-  {
-    label: 'Email Body',
-    name: 'body'
-  },
-  {
-    label: 'Recipient List',
-    name: 'emails'
-  }
-];
+import formFields from './formFields';
 
 const validate = (values) => {
   const errors = {};
-  errors.emails = validateEmail(values.emails || '');
+  errors.recipients = validateEmail(values.recipients || '');
 
-  FIELDS.forEach(({ name }) => {
+  formFields.forEach(({ name }) => {
     if (!values[name]) {
       errors[name] = `You must provide ${name}`;
     } else if (name === 'body' && values.body.length < 15) {
@@ -56,8 +38,8 @@ export class SurveyForm extends Component {
     return (
       <div>
         {/* handleSubmit func is provided to us by reduxForm */}
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-          {this.renderFields(FIELDS)}
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
+          {this.renderFields(formFields)}
           <button className="teal btn-flat white-text right" type="submit">
             Continue
             <i className="material-icons right">done</i>
@@ -74,5 +56,6 @@ export class SurveyForm extends Component {
 
 export default reduxForm({
   validate,
+  destroyOnUnmount: false,
   form: 'surveyForm'
 })(SurveyForm);
