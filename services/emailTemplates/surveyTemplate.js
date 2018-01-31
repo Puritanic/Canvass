@@ -216,12 +216,12 @@ module.exports = survey => `
                             <div>
                               <a href="${
   process.env.REDIRECT_DOMAIN
-}/api/surveys/thanks">Yes</a>
+}/api/surveys/${survey.id}/yes">Yes</a>
                             </div>
                             <div>
                               <a href="${
   process.env.REDIRECT_DOMAIN
-}/api/surveys/thanks ">No</a>
+}/api/surveys/${survey.id}/no">No</a>
                             </div>
                           </td>
                         </tr>
